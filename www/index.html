@@ -1,28 +1,59 @@
 <!DOCTYPE html>
-<html style="height:100%">
- 
- <body>
-<form id="form1" runat="server">
-    <input type='file' id="imgInp" />
-    <img id="blah" src="#" alt="your image" />
-</form>
+<html Content-type: "text/html">
+<body>
+
+
+<script src="assets/js/jquery-1.11.3.min.js"></script><script type="text/javascript" src="assets/js/html2canvas.js"></script>
+<script type="text/javascript" src="assets/js/jquery.plugin.html2canvas.js"></script>
+
+<a onclick="capture();">Take shot</a>
+<div id="target" style="position: relative; width: 300px; height: 300px;">
+<input type="file" capture="camera" accept="image/*" id="takePictureField">
+<img id="yourimage" style="position: relative; width: 300px; height: 300px;">
+</div>
 
 <script type="text/javascript">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    var desiredWidth;
 
-            reader.onload = function (e) {
-                $('#blah').attr('src', e.target.result);
-            }
+    $(document).ready(function() {
+        $("#takePictureField").on("change",gotPic);
+        desiredWidth = window.innerWidth;
 
-            reader.readAsDataURL(input.files[0]);
+        if(!("url" in window) && ("webkitURL" in window)) {
+            window.URL = window.URL;   
+        }
+
+    });
+
+    function gotPic(event) {
+        if(event.target.files.length == 1 && 
+           event.target.files[0].type.indexOf("image/") == 0) {
+            $("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));
         }
     }
 
-    $("#imgInp").change(function(){
-        readURL(this);
-    });
+    function capture() {
+        $('#target').html2canvas({
+            onrendered: function (canvas) {
+                var img = canvas.toDataURL("image/png");
+                var output = encodeURIComponent(img);
+                var cur_path = 'uploads';
+
+                var Parameters = "image=" + output + "&filedir=" + cur_path;
+                $.ajax({
+                    type: "POST",
+                    url: "savePNG.php",
+                    data: Parameters,
+                    success : function(data)
+                    {
+                        console.log("screenshot done");
+                    }
+                }).done(function() {
+                    //$('body').html(data);
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>
