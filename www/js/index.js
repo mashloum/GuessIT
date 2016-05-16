@@ -63,7 +63,7 @@ var app = {
 
     captureImage : function() {
         navigator.camera.getPicture(app.onImageSuccess, app.onFail, 
-            {quality :50, destinationType:Camera.DestinationType.DATA_URL });
+            {quality :50, destinationType:Camera.DestinationType.DATA_URL, correctOrientation: true });
     },
 
     onImageSuccess : function(imageData) {
