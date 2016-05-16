@@ -69,9 +69,12 @@ var app = {
     onImageSuccess : function(imageData) {
         $("#theImage").attr("src",imageData);
         console.log("image updated");
+
+          var image = document.getElementById('theImage');
+         image.src = "data:image/jpeg;base64," + imageData;
     },
     onFail : function(imageData) {
-        console.log("failed to take a pic !!");
+        alert("failed to take a pic !!");
     },
     // Bind Event Listeners
     //
