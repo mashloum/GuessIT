@@ -60,6 +60,19 @@ var app = {
         this.bindEvents();
 
     },
+
+    captureImage : function() {
+        navigator.camera.getPicture(app.onImageSuccess, app.onFail, 
+            {quality :50, destinationType:Camera.DestinationType.DATA_URL });
+    },
+
+    onImageSuccess : function(imageData) {
+        $("#theImage").attr("src","data:image/jpeg:base64,"+imageData);
+        console.log("image updated");
+    },
+    onFail : function(imageData) {
+        console.log("failed to take a pic !!");
+    },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
