@@ -67,7 +67,7 @@ var app = {
     },
 
     onImageSuccess : function(imageData) {
-        $("#theImage").attr("src","data:image/jpeg:base64,"+imageData);
+        $("#theImage").attr("src",imageData);
         console.log("image updated");
     },
     onFail : function(imageData) {
