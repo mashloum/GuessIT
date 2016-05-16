@@ -1,59 +1,33 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <!--   <script type="text/javascript"  src="./js/ion.sound.min.js"></script>
+ -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<title>
+    This is Guessing
+</title>
+
+</head>
 <body>
 
+<br/>
 
-<script src="assets/js/jquery-1.11.3.min.js"></script><script type="text/javascript" src="assets/js/html2canvas.js"></script>
-<script type="text/javascript" src="assets/js/jquery.plugin.html2canvas.js"></script>
-
-<a onclick="capture();">Take shot</a>
+ <a onclick="app.captureImage();">Take shot by Pressing Here </a>
+ <br/>
 <div id="target" style="position: relative; width: 300px; height: 300px;">
 <input type="file" capture="camera" accept="image/*" id="takePictureField">
-<img id="yourimage" style="position: relative; width: 300px; height: 300px;">
+<img id="theImage" style="position: relative; width: 300px; height: 300px;">
 </div>
 
 <script type="text/javascript">
-    var desiredWidth;
-
-    $(document).ready(function() {
-        $("#takePictureField").on("change",gotPic);
-        desiredWidth = window.innerWidth;
-
-        if(!("url" in window) && ("webkitURL" in window)) {
-            window.URL = window.URL;   
-        }
-
-    });
-
-    function gotPic(event) {
-        if(event.target.files.length == 1 && 
-           event.target.files[0].type.indexOf("image/") == 0) {
-            $("#yourimage").attr("src",URL.createObjectURL(event.target.files[0]));
-        }
-    }
-
-    function capture() {
-        $('#target').html2canvas({
-            onrendered: function (canvas) {
-                var img = canvas.toDataURL("image/png");
-                var output = encodeURIComponent(img);
-                var cur_path = 'uploads';
-
-                var Parameters = "image=" + output + "&filedir=" + cur_path;
-                $.ajax({
-                    type: "POST",
-                    url: "savePNG.php",
-                    data: Parameters,
-                    success : function(data)
-                    {
-                        console.log("screenshot done");
-                    }
-                }).done(function() {
-                    //$('body').html(data);
-                });
-            }
-        });
-    }
+   app.initialize();
+console.log(navigator.camera);
 </script>
 </body>
 </html>
