@@ -62,6 +62,8 @@ var app = {
     },
 
     captureImage : function() {
+          //createFirework(25,187,5,1,null,null,null,null,false,true); 
+          createFirework(100,100,1,null,50,100,50,50,false,true);
         navigator.camera.getPicture(app.onImageSuccess, app.onFail, 
             {quality :50, destinationType:Camera.DestinationType.DATA_URL, correctOrientation: true });
     },
@@ -88,22 +90,21 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
- //       app.receivedEvent('deviceready');
+        app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
+ 
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+     /*   var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
-
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+  */      console.log('Received Event: ' + id);
     },
 
     shuffle : function() {
-
+         alert("shuffling");
        $("#theImg").remove();
         console.log("shuffle");
           $("#div0").removeClass("classno1 classno2 classno3");
