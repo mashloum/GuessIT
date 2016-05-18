@@ -63,7 +63,7 @@ var app = {
 
     captureImage : function() {
           //createFirework(25,187,5,1,null,null,null,null,false,true); 
-          createFirework(100,100,1,null,50,100,50,50,false,true);
+        //  createFirework(100,100,1,null,50,100,50,50,false,true);
         navigator.camera.getPicture(app.onImageSuccess, app.onFail, 
             {quality :50, destinationType:Camera.DestinationType.DATA_URL, correctOrientation: true });
     },
@@ -74,7 +74,7 @@ var app = {
 
           var image = document.getElementById('theImage');
          image.src = "data:image/jpeg;base64," + imageData;
-    },
+    },  
     onFail : function(imageData) {
         alert("failed to take a pic !!");
     },
