@@ -18,62 +18,71 @@
  */
  var theARRay=[];
 var counter=2;
-var latRandom = 0;
+var lastRandom = 2;
+IMAGETAKEN=0;
 var app = {
     // Application Constructor
     initialize: function() {
-       // alert("initialize");
-            theARRay[0] = "rahaf.gif";
-            theARRay[1] = "amr.gif";
-            theARRay[2] ="qasem.gif";
+        theARRay[0] = "img/rahaf.gif";
+        theARRay[1] = "img/amr.gif";
+        theARRay[2] = "img/qasem.gif";
          
-
-/*
-        if( !$("#example" ).data( "photobooth" ).isSupported )
-        {
-            alert("is not supported!!");
-        }*/
-
-
-
-         $("#resetButt").on("click", function(){
+        $("#resetButt").on("click", function(){
             app.shuffle();
         });
 
-
-
         $(".classno1, .classno2, .classno3").on("click", function(event){
             console.log(event.target.id+" : has been clicked");
-            var arrIdx = (event.target.id).slice(-1);
+
+            var divIdx = (event.target.id).slice(-1);
             $("#theImg").remove();
-            var img = document.createElement("IMG");
-            img.src = "img/"+theARRay[ arrIdx];
-            img.id="theImg";
-            img.className ="pic";
-            document.getElementById(event.target.id).appendChild(img);
+            var absol = ((lastRandom + 2)  % 3 ) ;
+
+            var idxShifted = (( divIdx+lastRandom )  % 3 ) ;
+       console.log(  "divIdx  " + divIdx + "   absol:"+absol +  "       idxShifted: " + idxShifted + " theARRay of the idx  " +theARRay[idxShifted]);
+ 
+    var img = document.createElement("IMG");
+                img.src = theARRay[idxShifted];
+                img.id="theImg";
+                img.className ="pic";
+
+            if(parseInt(idxShifted) === 0) {
+                  console.log( divIdx + "divIdx is MATCHINg .. Fireworks !! absol:"+absol);
+                  if(IMAGETAKEN===1) {
+                     var imag = document.getElementById('capImage');
+                     img.src = imag.src; 
+                    }
+                    document.getElementById(event.target.id).appendChild(img);
+                   createFirework(25,187,5,1,null,null,null,null,false,true); 
+                   createFirework(50,187,5,1,null,null,null,null,false,true); 
+                   createFirework(100,100,1,null,50,100,50,50,false,true);
+
+                 } else {
+                    document.getElementById(event.target.id).appendChild(img);
+            }
 
 //            $('#'+event.target.id).prepend('<img class="pic" id="theImg" src=img/"' + theARRay[ arrIdx] + '" />')
         });
-        
-        
-
         this.bindEvents();
-
     },
 
     captureImage : function() {
-          //createFirework(25,187,5,1,null,null,null,null,false,true); 
-        //  createFirework(100,100,1,null,50,100,50,50,false,true);
+        IMAGETAKEN =0;
+
         navigator.camera.getPicture(app.onImageSuccess, app.onFail, 
             {quality :50, destinationType:Camera.DestinationType.DATA_URL, correctOrientation: true });
     },
 
     onImageSuccess : function(imageData) {
-        $("#theImage").attr("src",imageData);
+        $("#capImage").attr("src",imageData);
         console.log("image updated");
 
-          var image = document.getElementById('theImage');
+          var image = document.getElementById('capImage');
          image.src = "data:image/jpeg;base64," + imageData;
+            theARRay[0] =  image.src;
+            IMAGETAKEN =1;
+            app.shuffle();
+
     },  
     onFail : function(imageData) {
         alert("failed to take a pic !!");
@@ -104,7 +113,6 @@ var app = {
     },
 
     shuffle : function() {
-         alert("shuffling");
        $("#theImg").remove();
         console.log("shuffle");
           $("#div0").removeClass("classno1 classno2 classno3");
@@ -124,11 +132,11 @@ var app = {
             counter=1;
             $("#div0").addClass("classno3");
             $("#div1").addClass("classno1");
-            $("#div1").addClass("classno2");
+            $("#div2").addClass("classno2");
           }
  
-            lastrandom = app.getRandomInt(0,1,2);
-            switch(lastrandom) {
+            lastRandom = app.getRandomInt(0,1,2);
+/*            switch(lastrandom) {
                 case 0: theARRay = ['rahaf.gif', 'amr.gif', 'qasem.gif' ];
                 break;
                 case 1: theARRay = [ 'amr.gif', 'qasem.gif', 'rahaf.gif' ];
@@ -137,7 +145,7 @@ var app = {
                 break;
             }
 
-             console.log("thRandom=" + lastrandom);
+*/             console.log("thRandom=" + lastRandom);
   /*          var x = theARRay[0];
             theARRay[0] = theARRay[theRandom];
             theARRay[theRandom] = x; 

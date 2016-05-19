@@ -31,6 +31,7 @@
             <div id="div0" style="height: 25%" class="classno1">A</div>    
             <div id="div1" style="height: 25%" class="classno2">B</div>
             <div id="div2" style="height: 25%" class="classno3">C</div>
+            <div id="fireContainer" style="height: 2%"></div>
     </div>
     <div data-role="footer" >
 
@@ -44,7 +45,7 @@
      <div id="fw" class="firework"></div>
      <div id="fp" class="fireworkParticle"><img src="img/particles.gif" alt="" /></div>
     </div>
-    <div id="fireContainer"></div>
+
       <br/>           <br/>
     </div>
  </div>
@@ -53,7 +54,7 @@
  <div data-role="page" id="imageD">
     <div data-role="content">
     <button id="divButt0" onclick="app.captureImage();"  style="float:left">Use this image</button>
-<img id="theImage" src="" style="position: relative; width: 300px; height: 300px;">
+<img id="capImage" src="" style="position: relative; width: 300px; height: 300px;">
 
 
 <a href="#mainPage" data-role="button" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Go Back</span></span></a>
@@ -65,7 +66,6 @@
    
 <script type="text/javascript">
   $(document).ready(function () {
-        alert("hello !!!");
      app.initialize();
     console.log(navigator.camera);
 });
