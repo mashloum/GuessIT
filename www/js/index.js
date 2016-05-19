@@ -28,7 +28,8 @@ var app = {
         theARRay[2] = "img/qasem.gif";
         ion.sound({
     sounds: [
-        {  name: "cheer" }         
+        {  name: "cheer" } ,
+        {  name: "sad" }
     ],
     volume: 1,
     path: "media/",
@@ -69,6 +70,7 @@ var app = {
 
                  } else {
                     document.getElementById(event.target.id).appendChild(img);
+                    ion.sound.play("sad");
             }
 
 //            $('#'+event.target.id).prepend('<img class="pic" id="theImg" src=img/"' + theARRay[ arrIdx] + '" />')
