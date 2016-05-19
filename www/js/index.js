@@ -26,6 +26,15 @@ var app = {
         theARRay[0] = "img/rahaf.gif";
         theARRay[1] = "img/amr.gif";
         theARRay[2] = "img/qasem.gif";
+        ion.sound({
+    sounds: [
+        {  name: "cheer" }         
+    ],
+    volume: 1,
+    path: "media/",
+    preload: true
+});
+
          
         $("#resetButt").on("click", function(){
             app.shuffle();
@@ -53,6 +62,7 @@ var app = {
                      img.src = imag.src; 
                     }
                     document.getElementById(event.target.id).appendChild(img);
+                    ion.sound.play("cheer");
                    createFirework(25,187,5,1,null,null,null,null,false,true); 
                    createFirework(50,187,5,1,null,null,null,null,false,true); 
                    createFirework(100,100,1,null,50,100,50,50,false,true);
