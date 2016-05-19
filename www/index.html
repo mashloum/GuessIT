@@ -14,8 +14,7 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script type="text/javascript" src="cordova.js"></script>
- 
+  
 <script type="text/javascript" src="js/index.js"></script>
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 
@@ -25,25 +24,15 @@
 
 </head>
 <body>
+ <div data-role="page" id="mainPage">
 
 
-
-<br/>
-
- 
-
-
- <div data-role="page" id="mainPage" style="100% !important">
-
-
-    <div data-role="content">
-        <div class="" style="height: 75%">
+    <div id="maindiv" role="main" data-role="content">
             <div id="div0" style="height: 25%" class="classno1">A</div>    
             <div id="div1" style="height: 25%" class="classno2">B</div>
             <div id="div2" style="height: 25%" class="classno3">C</div>
-        </div>
     </div>
-    <div data-role="footer" style="height: 25%">
+    <div data-role="footer" >
 
 <!--         <input type="file" accept="image/*" capture="camera">
  -->   <!--            <p><b>Note:</b> When an animation is finished, it changes back to its original style.</p>
@@ -73,11 +62,34 @@
 </div>
 
 
+   
 <script type="text/javascript">
-   app.initialize();
-console.log(navigator.camera);
+  $(document).ready(function () {
+        alert("hello !!!");
+     app.initialize();
+    console.log(navigator.camera);
+});
 </script>
 
+<script type="text/javascript">
+    function ScaleContentToDevice(){
+    scroll(0, 0);
+    var content = $.mobile.getScreenHeight() - $(".ui-header").outerHeight() - $(".ui-footer").outerHeight() - $(".ui-content").outerHeight() + $(".ui-content").height();
+    $(".ui-content").height(content);
+}
+
+$(document).on( "pagecontainershow", function(){
+    ScaleContentToDevice();        
+});
+
+$(window).on("resize orientationchange", function(){
+    ScaleContentToDevice();
+});
+</script> 
+
+<script type="text/javascript" src="cordova.js"></script>
+
+  
 </body>
  
 
